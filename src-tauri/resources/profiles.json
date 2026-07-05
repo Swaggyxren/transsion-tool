@@ -1,0 +1,67 @@
+{
+  "oem": "Transsion",
+  "brands": ["Tecno", "Infinix", "Itel"],
+  "models": [
+    "Pova 5",
+    "Pova 5 Pro",
+    "Pova 4",
+    "Pova 4 Pro",
+    "Spark 10",
+    "Spark 10 Pro",
+    "Note 30",
+    "Note 30 Pro",
+    "Hot 30",
+    "Hot 30i",
+    "Phantom V",
+    "Camon 20",
+    "Camon 20 Pro"
+  ],
+  "unlock_commands": [
+    {
+      "command": "fastboot",
+      "args": ["flashing", "unlock"],
+      "confirm_on_device": true,
+      "description": "Unlock bootloader via fastboot flashing unlock"
+    }
+  ],
+  "unlock_prerequisites": [
+    "USB Debugging enabled",
+    "OEM Unlocking enabled",
+    "Tecno/Infinix/Itel account (2+ weeks old)"
+  ],
+  "unlock_requires_code": false,
+  "forbidden_commands": [
+    "fastboot flashing lock",
+    "fastboot oem lock"
+  ],
+  "dangerous_commands": [
+    {
+      "command": "fastboot erase userdata",
+      "reason": "This will wipe all user data."
+    },
+    {
+      "command": "fastboot flash vbmeta",
+      "reason": "Incorrect vbmeta can cause bootloop."
+    }
+  ],
+  "supports_fastbootd": true,
+  "requires_vbmeta_disable": true,
+  "known_partitions": [
+    "boot", "boot_a", "boot_b",
+    "recovery",
+    "vbmeta", "vbmeta_a", "vbmeta_b",
+    "super",
+    "system", "system_a", "system_b",
+    "product", "product_a", "product_b",
+    "system_ext", "system_ext_a", "system_ext_b",
+    "vendor", "vendor_a", "vendor_b",
+    "dtbo",
+    "userdata", "metadata", "cache"
+  ],
+  "notes": [
+    "Locking the bootloader with fastboot will BRICK your device.",
+    "Use SP Flash Tool to re-lock Transsion devices.",
+    "Always disable vbmeta verification before flashing GSIs."
+  ],
+  "image_url_template": "https://www.gsmarena.com/{model_slug}-{id}.php"
+}
