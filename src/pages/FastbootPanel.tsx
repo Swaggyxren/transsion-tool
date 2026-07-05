@@ -111,7 +111,7 @@ export default function FastbootPanel({ device, loading, onRefresh }: FastbootPa
   const lockBootloader = () => {
     const cmd = "fastboot flashing lock";
     if (isForbidden(cmd)) { write("Command forbidden for this device profile."); return; }
-    requestConfirm("Lock Bootloader", cmd, "Lock the bootloader?", "CRITICAL WARNING: Locking the bootloader via fastboot with modified imgs (root, custom ROMs, GSIs) WILL BRICK Transsion devices. Only lock if the device is running 100% untouched, official stock firmware.", () => {
+    requestConfirm("Lock Bootloader", cmd, "Lock the bootloader?", "CRITICAL WARNING: Locking the bootloader via fastboot with modified imgs (root, custom ROMs, GSIs) WILL BRICK Transsion devices. Only lock if the device is running 100% untouched, official stock firmware.\n\nRecommended: Use dedicated tools like AMT Tool or Phoenix Tool instead of fastboot flashing lock on Transsion devices.", () => {
       requestConfirm(
         "FINAL CONFIRMATION",
         cmd,
