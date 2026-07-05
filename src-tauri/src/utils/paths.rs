@@ -16,9 +16,23 @@ pub fn get_app_data_dir() -> Result<String, String> {
 
 #[command]
 pub fn get_placebo_path(app: tauri::AppHandle) -> Result<String, String> {
+    // Portable mode: check alongside the exe first
+    if let Ok(exe_dir) = app.path().resource_dir() {
+        let sidecar = exe_dir.join("placebo.img");
+        if sidecar.exists() {
+            return Ok(sidecar.to_string_lossy().to_string());
+        }
+    }
+
+    // Bundled mode: resolve from app resources
     let resource_path = app
         .path()
         .resolve("resources/placebo.img", tauri::path::BaseDirectory::Resource)
         .map_err(|e| format!("Failed to resolve resource path: {}", e))?;
-    Ok(resource_path.to_string_lossy().to_string())
+
+    if resource_path.exists() {
+        return Ok(resource_path.to_string_lossy().to_string());
+    }
+
+    Err("placebo.img not found — place it alongside the executable or install the app properly.".to_string())
 }
