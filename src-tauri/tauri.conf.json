@@ -56,6 +56,14 @@
     ],
     "resources": [
       "resources/placebo.img"
-    ]
+    ],
+    "windows": {
+      "nsis": {
+        "installMode": "currentUser",
+        "installerIcon": "icons/icon.ico",
+        "includeWebView2": true
+      },
+      "wix": null
+    }
   }
 }
